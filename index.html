@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <title>the Kernel Panic Button</title>
     <style type="text/css" media="screen">
         html {
@@ -22,12 +23,15 @@
             border-radius: 5px;
             font-size: 14px;
         }
-        button:Active {
+        button:Active,a {
             color: #aaa;
         }
-        p {
+        p, a {
             line-height: 1.4em;
             font-size: 1em;
+        }
+        a, a:Visited {
+            text-decoration: none;
         }
     </style>
 </head>
@@ -35,15 +39,17 @@
     <div id="app">
         <button v-on:click="panicToday">今天恐慌吗?</button>
         <p>{{ panicMessage }}</p>
+        {{{ go }}}
     </div>
 </body>
 <script src="http://cdn.bootcss.com/jquery/2.2.1/jquery.js"></script>
 <script src="http://cdn.bootcss.com/vue/1.0.17/vue.min.js"></script>
 <script type="text/javascript">
-    new Vue({
+    var vm = new Vue({
         el: '#app',
         data: {
-            panicMessage: '你永远不知道你按下之后会发生什么'
+            panicMessage: '你永远不知道你按下之后会发生什么',
+            go: ''
         },
         methods: {
             panicToday: function () {
@@ -56,8 +62,10 @@
                     encodeURIComponent('https://ipn.li/kernelpanic/') + '&callback=?',
                     function (data) {
                         if (htmlToDateArray(data.contents) == new Date().Format("yyyy-MM-dd")) {
+                            vm.$data.go = '<a href="https://ipn.li/kernelpanic/">前往收听</a>';
                             alert("恐慌。");
                         } else {
+                            vm.$data.go = '<a href="http://gaoryrt.com/">from gaoryrt with ♥︎.</a>';
                             alert("不恐慌。");
                         }
                 });
