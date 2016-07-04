@@ -1,3 +1,4 @@
+# *非特殊情况不再更新*
 # Kernel-Panic-Button
 A Kernel Panic Button from podcast the Kernel Panic #38  
 [online version](http://gaoryrt.com/CV/the-Kernel-Panic-Button/)
